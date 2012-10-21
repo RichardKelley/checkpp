@@ -1,7 +1,7 @@
-Check++
+Checkpp
 =======
 
-Check++ is a library for random testing in C++11. It is inspired by
+Checkpp is a library for random testing in C++11. It is inspired by
 and aims to reproduce the functionality of the Haskell QuickCheck
 library, using support for functional programming that has been
 recently added to C++.
@@ -9,10 +9,10 @@ recently added to C++.
 Current Features
 ================
 
-At present, the library supports the core functionality provided by
-QuickCheck: property-based specifications (via lambda expressions) and
-random generation of (basic, non-function) built-in and user-defined
-data.
+At present, the library aims to support the core functionality
+provided by QuickCheck: property-based specifications (via lambda
+expressions) and random generation of (basic, non-function) built-in
+and user-defined data.
 
 TODO
 ====
