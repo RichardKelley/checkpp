@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace check++ {
+namespace checkpp {
 
   /*!
     Result represents the result of running a single test.
@@ -41,6 +41,6 @@ namespace check++ {
     
   };
 
-} // namespace check++
+} // namespace checkpp
 
 #endif // RESULT_H

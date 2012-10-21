@@ -1,10 +1,10 @@
 #ifndef PROPERTY_H
 #define PROPERTY_H
 
-namespace check++ {
+namespace checkpp {
 
 
-} // namespace check++
+} // namespace checkpp
 
 
 #endif // PROPERTY_H

@@ -1,10 +1,10 @@
 #ifndef ARBITRARY_H
 #define ARBITRARY_H
 
-namespace check++ {
+namespace checkpp {
 
 
-} // namespace check++
+} // namespace checkpp
 
 
 #endif // ARBITRARY_H
