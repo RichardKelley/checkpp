@@ -66,6 +66,6 @@ namespace checkpp {
 } // namespace checkpp
 
 // implementations for the above declarations.
-#include "arbitrary.hpp"
+#include "impl/arbitrary.hpp"
 
 #endif // ARBITRARY_H

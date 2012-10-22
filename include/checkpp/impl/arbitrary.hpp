@@ -1,4 +1,4 @@
-#include "arbitrary.h"
+#include "checkpp/arbitrary.h"
 
 #include <type_traits>
 #include <random>

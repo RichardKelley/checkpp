@@ -21,3 +21,7 @@ include_directories(${PROJECT_SOURCE_DIR}/gtest-1.6.0/include)
 # TODO
 
 # Build test programs
+add_executable(test_arbitrary
+  src/test/test_arbitrary.cpp
+)
+target_link_libraries(test_arbitrary gtest_main)
