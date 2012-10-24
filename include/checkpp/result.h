@@ -14,26 +14,37 @@ namespace checkpp {
   class Result {
   private:
     bool ok;
+
+    // valid == false is how we're faking Maybe in C++.
+    bool valid;
     std::vector<std::string> stamp;
     std::vector<std::string> arguments;
 
   public:
     Result() 
       : ok{false}
+    , valid{false}
     , stamp{}
     , arguments{} { }
 
     Result(bool ok_)
       : ok{ok_}
+    , valid{true}
     , stamp{}
     , arguments{} { }
 
     bool getOk() const {
       return ok;
     }
-
     void setOk(bool ok_) {
       ok = ok_;
+    }
+
+    bool getValid() const {
+      return valid;
+    }
+    void setValid(bool v) {
+      valid = v;
     }
 
     // TODO - add code for stamps and arguments

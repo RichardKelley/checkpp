@@ -25,3 +25,8 @@ add_executable(test_arbitrary
   src/test/test_arbitrary.cpp
 )
 target_link_libraries(test_arbitrary gtest_main)
+
+add_executable(test_property
+  src/test/test_property.cpp
+)
+target_link_libraries(test_property gtest_main)
