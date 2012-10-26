@@ -7,6 +7,12 @@
 
 namespace checkpp {
   
+  enum maybe_bool {
+    TRUE,
+    FALSE,
+    NOTHING
+  };
+
   /*!
     A property represents a predicate that can be either true or
     false. Properties are tested by the system to yield results.
@@ -24,7 +30,7 @@ namespace checkpp {
     std::function<bool(Arguments...)> prop;
     
     // We're faking the Maybe monad using this variable.
-    bool valid;
+    maybe_bool valid;
     
   public:
     
@@ -33,25 +39,32 @@ namespace checkpp {
     */
   Property()
     : prop{[](){}}
-    , valid{false} { }
-    
+    , valid{NOTHING} { }
+
     /*!
       Create a property that uses the given predicate.
     */
   Property(std::function<bool(Arguments...)> prop_)
     : prop{prop_}
-    , valid{true} { }
+    , valid{TRUE} { }
     
+    /*!
+      Copy constructor.
+    */
+  Property(const Property& other)
+    : prop{other.prop}
+    , valid{TRUE} {    }
+
     /*
       We evaluate the predicate represented by this property by
       calling the function call operator.
     */
     Result operator()(Arguments...);
 
-    void setValid(bool b) {
+    void setValid(maybe_bool b) {
       valid = b;
     }
-    bool getValid() const {
+    maybe_bool getValid() const {
       return valid;
     }
   };
@@ -62,7 +75,7 @@ namespace checkpp {
   */
   template <typename... Arguments>
   Property<Arguments...> operator>>(const bool b, Property<Arguments...> p) {
-    p.setValid(b);
+    p.setValid(b ? TRUE : FALSE);
     return p;
   }
 

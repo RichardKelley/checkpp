@@ -1,8 +1,10 @@
 #ifndef RESULT_H
 #define RESULT_H
 
+#include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 namespace checkpp {
 
@@ -33,24 +35,41 @@ namespace checkpp {
     , valid{true}
     , stamp{}
     , arguments{} { }
-
+    
     bool getOk() const {
       return ok;
     }
     void setOk(bool ok_) {
       ok = ok_;
     }
-
+    
     bool getValid() const {
       return valid;
     }
     void setValid(bool v) {
       valid = v;
     }
-
+    
     // TODO - add code for stamps and arguments
-        
+    
   };
+  
+  bool summarize(std::vector<Result> results) {
+    std::string summary;
+    int totalTests = results.size();
+    int validTests = std::count_if(results.begin(), results.end(),
+				   [](Result r) { return r.getValid(); });
+    int passedTests = std::count_if(results.begin(), results.end(),
+				    [](Result r) { return r.getOk(); });
+    
+    summary = "Attempted a total of " + std::to_string(totalTests) +
+      " tests.\nOf these, " + std::to_string(validTests) + 
+      " were executed, and\n" + std::to_string(passedTests) + " passed.";
+
+    std::cout << summary << std::endl;
+
+    return passedTests == validTests;
+  }
 
 } // namespace checkpp
 

@@ -14,7 +14,10 @@ TEST(BasicTest, FooTest) {
   // declare property
   checkpp::Property<int> propSimple {
     [](int i) {
-      return i % 2 >= 0;
+      if (i > 0) 
+	return i%2 >= 0;
+      else 
+	return true;
     }
   };
 
@@ -25,10 +28,10 @@ TEST(BasicTest, FooTest) {
 TEST(BasicTest, BarTest) {
 
   // declare property
-  auto func = [](int i) -> bool {
-    return i % 2 >= 0;
+  auto func = [](int i, int j) {
+    return i + j == j + i;
   };
   
   // test property
-  checkpp::check(checkpp::Property<int>{func});
+  checkpp::check(checkpp::Property<int,int>{func});
 }
