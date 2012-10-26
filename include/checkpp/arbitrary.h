@@ -5,18 +5,16 @@
 #include <random>
 #include <unistd.h>
 
-inline std::mt19937& rng() {
-  static std::mt19937 rng(time(nullptr));
-  return rng;
-}
-
 namespace checkpp {
   
   /*!
     A standard RNG. We initialize this once and share the rng in
     arbitrary instances.
   */
-  //std::mt19937& rng();
+  inline std::mt19937& rng() {
+    static std::mt19937 rng(time(nullptr));
+    return rng;
+  }
 
   /*!
     Return an arbitrary instance of an integral type.
