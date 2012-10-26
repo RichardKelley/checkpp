@@ -17,6 +17,7 @@ namespace checkpp {
 
     // valid == false is how we're faking Maybe in C++.
     bool valid;
+
     std::vector<std::string> stamp;
     std::vector<std::string> arguments;
 
@@ -48,8 +49,7 @@ namespace checkpp {
     }
 
     // TODO - add code for stamps and arguments
-    
-    
+        
   };
 
 } // namespace checkpp

@@ -22,6 +22,7 @@ include_directories(${PROJECT_SOURCE_DIR}/gtest-1.6.0/include)
 
 # Build test programs
 add_executable(test_arbitrary
+  src/main/arbitrary.cpp
   src/test/test_arbitrary.cpp
 )
 target_link_libraries(test_arbitrary gtest_main)
@@ -30,3 +31,9 @@ add_executable(test_property
   src/test/test_property.cpp
 )
 target_link_libraries(test_property gtest_main)
+
+add_executable(test_checkpp
+  src/main/arbitrary.cpp
+  src/test/test_checkpp.cpp
+)
+target_link_libraries(test_checkpp gtest_main)

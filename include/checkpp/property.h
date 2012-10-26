@@ -27,8 +27,19 @@ namespace checkpp {
     bool valid;
     
   public:
+    
+    /*!
+      Create an empty, invalid property.
+    */
+  Property()
+    : prop{[](){}}
+    , valid{false} { }
+    
+    /*!
+      Create a property that uses the given predicate.
+    */
   Property(std::function<bool(Arguments...)> prop_)
-    : prop{prop_} 
+    : prop{prop_}
     , valid{true} { }
     
     /*
