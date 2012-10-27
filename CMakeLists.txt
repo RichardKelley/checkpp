@@ -7,6 +7,8 @@ set(CMAKE_CXX_FLAGS "-std=c++0x")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
+option(BUILD_TESTS FALSE)
+
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
   ${PROJECT_SOURCE_DIR}/src/main
@@ -14,13 +16,9 @@ include_directories(
 )
 
 # Google test
+if (BUILD_TESTS)
 add_subdirectory(${PROJECT_SOURCE_DIR}/gtest-1.6.0)
 include_directories(${PROJECT_SOURCE_DIR}/gtest-1.6.0/include)
-
-# Build library
-add_library(checkpp SHARED
-  src/main/arbitrary.cpp
-)
 
 # Build test programs
 add_executable(test_arbitrary
@@ -39,3 +37,9 @@ add_executable(test_checkpp
   src/test/test_checkpp.cpp
 )
 target_link_libraries(test_checkpp gtest_main)
+endif(BUILD_TESTS)
+
+# Build library
+add_library(checkpp SHARED
+  src/main/arbitrary.cpp
+)
