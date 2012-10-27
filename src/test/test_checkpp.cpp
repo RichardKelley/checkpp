@@ -7,8 +7,12 @@
 #include <iostream>
 
 #include "checkpp/checkpp.h"
-
 #include "gtest/gtest.h"
+
+#include "checkpp/arbitrary.h"
+
+// for testing user-defined arbitraries.
+
 
 TEST(BasicTest, FooTest) {
   // declare property
@@ -34,4 +38,32 @@ TEST(BasicTest, BarTest) {
   
   // test property
   checkpp::check(checkpp::Property<int,int>{func});
+}
+
+class IntWrapper {
+  int i;
+public:
+  IntWrapper(int i_) 
+    : i{i_} { }
+
+  int value() const {
+    return i;
+  }
+};
+
+// mildly annoying syntax, but we can easily generate arbitraries this
+// way.
+namespace checkpp {
+  template<> IntWrapper arbitrary<IntWrapper>(size_t sz) {
+    return IntWrapper{checkpp::arbitrary<int>(sz)};
+  }
+}
+TEST(CustomTest, IntWrapperTest) {
+  checkpp::Property<IntWrapper> wrapperProp {
+    [](IntWrapper iw) {
+      return iw.value() >= 0 || iw.value() < 0;
+    }
+  };
+
+  EXPECT_TRUE(checkpp::check(wrapperProp));  
 }
