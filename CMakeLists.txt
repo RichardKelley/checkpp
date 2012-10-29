@@ -39,6 +39,11 @@ add_executable(test_checkpp
 target_link_libraries(test_checkpp gtest_main)
 endif(BUILD_TESTS)
 
+add_executable(test_condition
+  src/test/test_condition.cpp 
+)
+target_link_libraries(test_condition gtest_main)
+
 # Build library
 add_library(checkpp SHARED
   src/main/arbitrary.cpp

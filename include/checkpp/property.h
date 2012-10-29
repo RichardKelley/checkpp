@@ -68,17 +68,6 @@ namespace checkpp {
       return valid;
     }
   };
-  
-  /*!
-    Determine the validity of this property based on the predicate
-    that evaluates to the first argument.
-  */
-  template <typename... Arguments>
-  Property<Arguments...> operator>>(const bool b, Property<Arguments...> p) {
-    p.setValid(b ? TRUE : FALSE);
-    return p;
-  }
-
 } // namespace checkpp
 
 #include "impl/property.hpp"

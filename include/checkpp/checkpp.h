@@ -7,6 +7,8 @@
 #include "checkpp/property.h"
 #include "checkpp/result.h"
 
+#include "checkpp/condition.h"
+
 /*!
   Main include for checkpp.
 
@@ -26,6 +28,10 @@ namespace checkpp {
   */
   template<typename... Arguments>
     bool check(Property<Arguments...> p, int ct = 100);
+
+  template<typename... Arguments> bool 
+    check(Condition<Arguments...> c, int ct = 1000);
+
 }
 
 #include "impl/checkpp.hpp"
