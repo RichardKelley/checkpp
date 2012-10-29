@@ -60,6 +60,4 @@ namespace checkpp {
 
 } // namespace checkpp
 
-#include "impl/result.hpp"
-
 #endif // RESULT_H
