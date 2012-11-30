@@ -6,11 +6,16 @@
 #include <iostream>
 #include <vector>
 
+/*!
+  Implementation for main check functions.
+
+  \author Richard Kelley
+*/
+
 namespace checkpp {
   
   template<typename... Arguments>
   bool check(Property<Arguments...> p, int ct = 100) {
-    // all instances tested (vacuously) return true.
     if (ct <= 0) {
       return true;
     }
@@ -18,10 +23,13 @@ namespace checkpp {
     size_t sz = 10;
     float progress = 0.0f;
     float deltaProgress = 0.0f;
-
     std::vector<Result> results;
+
     for (int i = 0; i < ct; ++i) {
-      // right now we use an ad hoc method for increasing size.
+      /*
+	Incrementally increase the size of the inputs.	
+	TODO - Replace this with something that is less ad-hoc.
+      */
       progress = (float)i/(float)ct;
       if (progress - deltaProgress > .1) {
 	deltaProgress += .1;
@@ -30,7 +38,6 @@ namespace checkpp {
       Result r = p(arbitrary<Arguments>(sz)...);
       results.push_back(r);
     }
-    // print results and tell us if we passed all tests.
     bool passed = summarize(results);
     return passed;
   }
@@ -43,16 +50,18 @@ namespace checkpp {
     if (ct <= 0) {
       return true;
     }
-
+    
     size_t sz = 10;
     float progress = 0.0f;
     float deltaProgress = 0.0f;
-
-    int failedAttempts = 0;
-
+    int successfulAttempts = 0;
+    
     std::vector<Result> results;
     for (int i = 0; i < ct; ++i) {
-      // right now we use an ad hoc method for increasing size.
+      /*
+	Incrementally increase the size of the inputs.
+	TODO - Replace this with something that is less ad-hoc.
+      */
       progress = (float)i/(float)ct;
       if (progress - deltaProgress > .1) {
 	deltaProgress += .1;
@@ -61,20 +70,22 @@ namespace checkpp {
       
       Result r = c.evaluate(arbitrary<Arguments>(sz)...);
       
-      if (!r.getValid()) {
-	failedAttempts++;
-	if (failedAttempts == ct / 2) {
-	  bool passed = summarize(results);
-	  return passed;
+      /*
+	Break out of testing if we succeed 100 times.
+	TODO replace 100 with a user-settable parameter.
+      */
+      if (r.getValid() && r.getOk()) {
+	successfulAttempts++;
+	if (successfulAttempts == 100) {
+	  results.push_back(r);
+	  break;
 	}
       }
       
       results.push_back(r);
     }
-    // print results and tell us if we passed all tests.
     bool passed = summarize(results);
     return passed;    
-
   }
 
-}
+} // namespace checkpp

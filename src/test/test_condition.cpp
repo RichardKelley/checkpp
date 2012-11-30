@@ -28,3 +28,18 @@ TEST(BasicTest, FooTest) {
   EXPECT_TRUE(checkpp::check(cond >> prop));
 
 }
+
+TEST(BasicTest, BarTest) {
+  std::function<bool(int)> cond = [](int i) {
+    return (i > 0) && (i % 5 == 0);
+  };
+
+  auto prop = checkpp::Property<int>{
+    [](int i) {
+      return (i+1) % 5 == 1;
+    }
+  };
+
+  EXPECT_TRUE(checkpp::check(cond >> prop));
+
+}
