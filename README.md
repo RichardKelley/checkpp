@@ -1,3 +1,5 @@
+_Note: I was using this project to learn C++11 features, and haven't had a chance to finish it. It's useful enough for playing with random property testing, but still needs a lot of work before it's as useful as QuickCheck. Have fun!_
+
 Checkpp
 =======
 
